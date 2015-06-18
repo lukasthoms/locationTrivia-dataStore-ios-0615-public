@@ -67,6 +67,11 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -146,14 +151,15 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+if ([sender isKindOfClass:[UITableViewCell class]]) {
+        NSIndexPath *ip = [self.tableView indexPathForSelectedRow];
+        FISLocation *location = self.locationsDataManager.locations[ip.row];
 
-    NSIndexPath *ip = [self.tableView indexPathForSelectedRow];
-    FISLocation *location = self.locationsDataManager.locations[ip.row];
+        FISTriviaTableViewController *triviaVC = segue.destinationViewController;
 
-    FISTriviaTableViewController *triviaVC = segue.destinationViewController;
-
-    triviaVC.trivia = location.trivia;
-
+        triviaVC.trivia = location.trivia;
+    }
 }
 
 @end

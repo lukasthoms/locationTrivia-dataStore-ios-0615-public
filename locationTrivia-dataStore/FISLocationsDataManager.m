@@ -9,6 +9,7 @@
 #import "FISLocationsDataManager.h"
 
 @implementation FISLocationsDataManager
+
 + (instancetype)sharedLocationsDataManager {
     static FISLocationsDataManager *_sharedLocationsDataManager = nil;
     static dispatch_once_t onceToken;
